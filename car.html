@@ -1,0 +1,250 @@
+<!doctype html>
+<html data-bs-theme="light" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
+    />
+    <title>Car Home</title>
+    <link
+      rel="stylesheet"
+      href="static/assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Montserrat:400,700&amp;display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic&amp;display=swap"
+    />
+    <link rel="stylesheet" href="static/assets/fonts/font-awesome.min.css" />
+    <link rel="stylesheet" href="static/assets/css/styles.min.css" />
+
+    <style>
+      /* --- Style for Uniform Portfolio Images --- */
+      .portfolio .portfolio-item {
+        aspect-ratio: 16/9;
+        overflow: hidden; /* Hides the parts of the image that get cropped */
+      }
+
+      .portfolio .portfolio-item img {
+        height: 100%;
+        width: 100%;
+        object-fit: fill; /*  Fills the container without stretching */
+        transition: transform 0.3s ease; /* Adds a smooth transition for the hover effect */
+      }
+
+      /*  zoom effect when hover over img */
+      .portfolio .portfolio-item:hover img {
+        transform: scale(1.05);
+      }
+      /* --- End of Portfolio Image Styles --- */
+
+      /*  color override*/
+      .fw-dark {
+        color: #000 !important;
+      }
+
+      /* Justify text in the About section */
+      #about .lead {
+        text-align: justify;
+      }
+      #mainNav {
+        padding: 0.25rem 0 !important;
+      }
+
+      #mainNav .navbar-nav .nav-link {
+        padding: 0.75rem 0.75rem !important;
+      }
+
+      #mainNav .navbar-brand {
+        padding: 0.5rem 0 !important;
+      }
+    </style>
+  </head>
+  <body
+    id="page-top"
+    data-bs-spy="scroll"
+    data-bs-target="#mainNav"
+    data-bs-offset="72"
+  >
+    <style>
+      /* The track we scroll down */
+      .video-scroll-container {
+        height: 400vh; /* Makes the scroll area 4x the height of the screen */
+        position: relative;
+        background-color: #ebedef; /* Matches your Bootstrap light theme */
+        z-index: 10;
+      }
+
+      /* Locks the video to the screen while inside the scroll container */
+      .video-sticky-wrapper {
+        position: sticky;
+        top: 0;
+        height: 100vh;
+        width: 100%;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .canvas-scroll-container {
+        height: 400vh;
+        position: relative;
+        background-color: #ebedef;
+      }
+      .canvas-sticky-wrapper {
+        position: sticky;
+        top: 0;
+        height: 100vh;
+        width: 100%;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      #car-canvas {
+        display: block;
+        max-width: 100%;
+        max-height: 100%;
+      }
+
+      /* Responsive adjustments for mobile */
+      @media (max-width: 768px) {
+        .canvas-scroll-container,
+        .video-scroll-container {
+          height: 250vh; /* Shorter scroll on mobile for better UX */
+        }
+      }
+
+      @media (max-width: 480px) {
+        .canvas-scroll-container,
+        .video-scroll-container {
+          height: 200vh; /* Even shorter on small phones */
+        }
+      }
+    </style>
+
+    <div class="canvas-scroll-container">
+      <div class="canvas-sticky-wrapper">
+        <canvas id="car-canvas"></canvas>
+      </div>
+    </div>
+
+    <script src="static/assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="static/assets/js/script.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/ScrollTrigger.min.js"></script>
+
+    <script>
+      // Register the ScrollTrigger plugin
+      gsap.registerPlugin(ScrollTrigger);
+
+      const canvas = document.getElementById("car-canvas");
+      const context = canvas.getContext("2d");
+
+      // Original frame dimensions (aspect ratio 16:9)
+      const FRAME_WIDTH = 1920;
+      const FRAME_HEIGHT = 1080;
+      const ASPECT_RATIO = FRAME_WIDTH / FRAME_HEIGHT;
+
+      // Responsive canvas sizing function
+      function resizeCanvas() {
+        const container = canvas.parentElement;
+        const containerWidth = container.clientWidth;
+        const containerHeight = container.clientHeight;
+        const containerRatio = containerWidth / containerHeight;
+
+        let newWidth, newHeight;
+
+        // Maintain aspect ratio while fitting container
+        if (containerRatio > ASPECT_RATIO) {
+          // Container is wider than video - fit to height
+          newHeight = containerHeight;
+          newWidth = containerHeight * ASPECT_RATIO;
+        } else {
+          // Container is taller than video - fit to width
+          newWidth = containerWidth;
+          newHeight = containerWidth / ASPECT_RATIO;
+        }
+
+        // Use device pixel ratio for sharp rendering on high-DPI screens
+        const dpr = window.devicePixelRatio || 1;
+        canvas.width = newWidth * dpr;
+        canvas.height = newHeight * dpr;
+
+        // Scale context to match DPR
+        context.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+        // Set CSS size
+        canvas.style.width = newWidth + "px";
+        canvas.style.height = newHeight + "px";
+      }
+
+      // Initial resize
+      resizeCanvas();
+
+      // --- UPDATED CONFIGURATION ---
+      const frameCount = 192; // Your exact number of frames
+
+      // This tells GSAP exactly how your files are named: ezgif-frame-XXX.jpg
+      const currentFrame = (index) => {
+        // EZGIF usually starts at frame 1, so we do index + 1
+        let frameNumber = (index + 1).toString().padStart(3, "0");
+        return `static/frames/ez1080/ezgif-frame-${frameNumber}.jpg`;
+      };
+      // -----------------------------
+
+      const images = [];
+      const car = { frame: 0 };
+
+      // Preload all 192 images into the browser's memory
+      for (let i = 0; i < frameCount; i++) {
+        const img = new Image();
+        img.src = currentFrame(i);
+        images.push(img);
+      }
+
+      // Draw the very first frame as soon as it loads so the screen isn't blank
+      images[0].onload = render;
+
+      // The GSAP Scroll Magic
+      gsap.to(car, {
+        frame: frameCount - 1,
+        snap: "frame",
+        ease: "none",
+        scrollTrigger: {
+          trigger: ".canvas-scroll-container",
+          start: "top top",
+          end: "bottom bottom",
+          scrub: 0.5,
+        },
+        onUpdate: render,
+      });
+
+      // Renders the current image to the canvas
+      function render() {
+        const dpr = window.devicePixelRatio || 1;
+        const drawWidth = canvas.width / dpr;
+        const drawHeight = canvas.height / dpr;
+        context.clearRect(0, 0, drawWidth, drawHeight);
+        context.drawImage(images[car.frame], 0, 0, drawWidth, drawHeight);
+      }
+
+      // Handle window resize
+      let resizeTimeout;
+      window.addEventListener("resize", () => {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(() => {
+          resizeCanvas();
+          render();
+          ScrollTrigger.refresh(); // Recalculate scroll positions after resize
+        }, 100);
+      });
+    </script>
+  </body>
+</html>
