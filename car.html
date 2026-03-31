@@ -92,14 +92,15 @@
       }
 
       .canvas-scroll-container {
-        height: 400vh;
+        height: 200vh;
         position: relative;
         background-color: #ebedef;
+        transition: background-color 0.15s ease-out;
       }
       .canvas-sticky-wrapper {
         position: sticky;
-        top: 0;
-        height: 100vh;
+        top: 25vh; /* Center the 50vh wrapper: (100vh - 50vh) / 2 */
+        height: 50vh;
         width: 100%;
         overflow: hidden;
         display: flex;
@@ -116,14 +117,22 @@
       @media (max-width: 768px) {
         .canvas-scroll-container,
         .video-scroll-container {
-          height: 250vh; /* Shorter scroll on mobile for better UX */
+          height: 150vh; /* Shorter scroll on mobile for better UX */
+        }
+        .canvas-sticky-wrapper {
+          height: 50vh;
+          top: 25vh;
         }
       }
 
       @media (max-width: 480px) {
         .canvas-scroll-container,
         .video-scroll-container {
-          height: 200vh; /* Even shorter on small phones */
+          height: 120vh; /* Even shorter on small phones */
+        }
+        .canvas-sticky-wrapper {
+          height: 40vh;
+          top: 30vh; /* Center the 40vh wrapper */
         }
       }
     </style>
@@ -189,20 +198,20 @@
       resizeCanvas();
 
       // --- UPDATED CONFIGURATION ---
-      const frameCount = 192; // Your exact number of frames
+      const frameCount = 98; // Your exact number of frames
 
       // This tells GSAP exactly how your files are named: ezgif-frame-XXX.jpg
       const currentFrame = (index) => {
         // EZGIF usually starts at frame 1, so we do index + 1
         let frameNumber = (index + 1).toString().padStart(3, "0");
-        return `static/frames/ez1080/ezgif-frame-${frameNumber}.jpg`;
+        return `static/frames/eznew/frame_${frameNumber}.webp`;
       };
       // -----------------------------
 
       const images = [];
       const car = { frame: 0 };
 
-      // Preload all 192 images into the browser's memory
+      // Preload all 98 images into the browser's memory
       for (let i = 0; i < frameCount; i++) {
         const img = new Image();
         img.src = currentFrame(i);
