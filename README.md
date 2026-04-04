@@ -51,27 +51,15 @@ zartan/
 
 1. Clone the repository
 2. Open `index.html` in a browser (or use a local server)
+<!--
 
-```bash
+````bash
 # Using Python
 python -m http.server 8000
 
 # Using Node
 npx serve
-```
+``` -->
 
 3. Navigate to `http://localhost:8000`
-
-## Scroll Animation
-
-The canvas displays a 98-frame sequence that plays as you scroll. Frames are located in `static/frames/eznew/` and named `frame_001.webp` through `frame_098.webp`.
-
-To use your own animation:
-
-1. Export frames as WebP (recommended) or JPG
-2. Name them sequentially with zero-padded numbers
-3. Update `frameCount` and `currentFrame()` path in the script
-
-## License
-
-MIT
+````
