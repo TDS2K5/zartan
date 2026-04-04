@@ -30,25 +30,6 @@ A premium frontend for a vintage car restoration (restomod) business. Features a
 - Next.js
 - MongoDB
 
-## Design System
-
-### Colors
-
-| Color      | Hex       | Usage                   |
-| ---------- | --------- | ----------------------- |
-| Violet     | `#6b4c9a` | Primary accent, buttons |
-| Turquoise  | `#40b5ad` | Section labels, accents |
-| Yellow     | `#f4d03f` | Highlights              |
-| Ivory      | `#fffff0` | Background tints        |
-| Grey Light | `#ebedef` | Page background         |
-| Charcoal   | `#2d2d2d` | Text                    |
-
-### Typography
-
-- **Headings**: Playfair Display (serif)
-- **Body**: Cormorant Garamond (serif)
-- **Labels/Nav**: Montserrat (sans-serif)
-
 ## Project Structure
 
 ```
