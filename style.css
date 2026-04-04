@@ -755,23 +755,6 @@
       }
 
       /* ============================================
-         ANIMATIONS
-      ============================================ */
-      .fade-up {
-        opacity: 0;
-        transform: translateY(40px);
-      }
-
-      .fade-in {
-        opacity: 0;
-      }
-
-      .slide-right {
-        opacity: 0;
-        transform: translateX(-40px);
-      }
-
-      /* ============================================
          RESPONSIVE
       ============================================ */
       @media (max-width: 1200px) {
