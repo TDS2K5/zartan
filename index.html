@@ -1,235 +1,1350 @@
 <!doctype html>
-<html data-bs-theme="light" lang="en">
+<html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
-    />
-    <title>Zartan Home</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Zartan Restomods | Premium Vintage Car Restoration</title>
+
+    <!-- Google Fonts - Legacy/Premium Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500&family=Montserrat:wght@300;400;500;600&display=swap"
       rel="stylesheet"
-      href="static/assets/bootstrap/css/bootstrap.min.css"
     />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css?family=Montserrat:400,700&amp;display=swap"
-    />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic&amp;display=swap"
-    />
-    <link rel="stylesheet" href="static/assets/fonts/font-awesome.min.css" />
-    <link rel="stylesheet" href="static/assets/css/styles.min.css" />
 
-    <style>
-      /* --- Style for Uniform Portfolio Images --- */
-      .portfolio .portfolio-item {
-        aspect-ratio: 16/9;
-        overflow: hidden; /* Hides the parts of the image that get cropped */
-      }
-
-      .portfolio .portfolio-item img {
-        height: 100%;
-        width: 100%;
-        object-fit: fill; /*  Fills the container without stretching */
-        transition: transform 0.3s ease; /* Adds a smooth transition for the hover effect */
-      }
-
-      /*  zoom effect when hover over img */
-      .portfolio .portfolio-item:hover img {
-        transform: scale(1.05);
-      }
-      /* --- End of Portfolio Image Styles --- */
-
-      /*  color override*/
-      .fw-dark {
-        color: #000 !important;
-      }
-
-      /* Justify text in the About section */
-      #about .lead {
-        text-align: justify;
-      }
-      #mainNav {
-        padding: 0.25rem 0 !important;
-      }
-
-      #mainNav .navbar-nav .nav-link {
-        padding: 0.75rem 0.75rem !important;
-      }
-
-      #mainNav .navbar-brand {
-        padding: 0.5rem 0 !important;
-      }
-    </style>
-  </head>
-  <body
-    id="page-top"
-    data-bs-spy="scroll"
-    data-bs-target="#mainNav"
-    data-bs-offset="72"
-  >
-    <style>
-      /* The track we scroll down */
-      .video-scroll-container {
-        height: 400vh; /* Makes the scroll area 4x the height of the screen */
-        position: relative;
-        background-color: #ebedef; /* Matches your Bootstrap light theme */
-        z-index: 10;
-      }
-
-      /* Locks the video to the screen while inside the scroll container */
-      .video-sticky-wrapper {
-        position: sticky;
-        top: 0;
-        height: 100vh;
-        width: 100%;
-        overflow: hidden;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
-
-      .canvas-scroll-container {
-        height: 200vh;
-        position: relative;
-        background-color: #ebedef;
-
-        background-size: 10px 10px;
-        transition: background-color 0.15s ease-out;
-      }
-      .canvas-sticky-wrapper {
-        position: sticky;
-        top: 25vh; /* Center the 50vh wrapper: (100vh - 50vh) / 2 */
-        height: 50vh;
-        width: 100%;
-        overflow: hidden;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
-      #car-canvas {
-        display: block;
-        max-width: 100%;
-        max-height: 100%;
-      }
-
-      /* Responsive adjustments for mobile */
-      @media (max-width: 768px) {
-        .canvas-scroll-container,
-        .video-scroll-container {
-          height: 150vh; /* Shorter scroll on mobile for better UX */
-        }
-        .canvas-sticky-wrapper {
-          height: 50vh;
-          top: 25vh;
-        }
-      }
-
-      @media (max-width: 480px) {
-        .canvas-scroll-container,
-        .video-scroll-container {
-          height: 120vh; /* Even shorter on small phones */
-        }
-        .canvas-sticky-wrapper {
-          height: 40vh;
-          top: 30vh; /* Center the 40vh wrapper */
-        }
-      }
-    </style>
-
-    <div class="canvas-scroll-container">
-      <div class="canvas-sticky-wrapper">
-        <canvas id="car-canvas"></canvas>
-      </div>
-    </div>
-
-    <script src="static/assets/bootstrap/js/bootstrap.min.js"></script>
-    <script src="static/assets/js/script.min.js"></script>
-
+    <!-- GSAP -->
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/ScrollTrigger.min.js"></script>
 
+    <style>
+      :root {
+        /* Brand Colors */
+        --violet: #6b4c9a;
+        --violet-dark: #4a3470;
+        --violet-light: #8b6cba;
+        --yellow: #f4d03f;
+        --yellow-muted: #e6c52f;
+        --ivory: #fffff0;
+        --ivory-dark: #f5f5dc;
+        --turquoise: #40b5ad;
+        --turquoise-dark: #2a968f;
+
+        /* Neutral Palette */
+        --grey-light: #ebedef;
+        --grey-medium: #c4c4c4;
+        --grey-dark: #4a4a4a;
+        --charcoal: #2d2d2d;
+
+        /* Typography */
+        --font-display: "Playfair Display", serif;
+        --font-body: "Cormorant Garamond", serif;
+        --font-accent: "Montserrat", sans-serif;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: var(--font-body);
+        background-color: var(--grey-light);
+        color: var(--charcoal);
+        overflow-x: hidden;
+      }
+
+      /* ============================================
+         NAVIGATION
+      ============================================ */
+      .navbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 1000;
+        padding: 1rem 3rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: linear-gradient(
+          180deg,
+          rgba(235, 237, 239, 0.98) 0%,
+          rgba(235, 237, 239, 0) 100%
+        );
+        transition: all 0.4s ease;
+      }
+
+      .navbar.scrolled {
+        background: rgba(235, 237, 239, 0.98);
+        box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
+        padding: 0.75rem 3rem;
+      }
+
+      .logo {
+        font-family: var(--font-display);
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: var(--violet);
+        text-decoration: none;
+        letter-spacing: 0.05em;
+      }
+
+      .logo span {
+        color: var(--turquoise);
+        font-style: italic;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 2.5rem;
+        list-style: none;
+      }
+
+      .nav-links a {
+        font-family: var(--font-accent);
+        font-size: 0.85rem;
+        font-weight: 500;
+        color: var(--grey-dark);
+        text-decoration: none;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        position: relative;
+        transition: color 0.3s ease;
+      }
+
+      .nav-links a::after {
+        content: "";
+        position: absolute;
+        bottom: -4px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: var(--violet);
+        transition: width 0.3s ease;
+      }
+
+      .nav-links a:hover {
+        color: var(--violet);
+      }
+
+      .nav-links a:hover::after {
+        width: 100%;
+      }
+
+      .nav-cta {
+        font-family: var(--font-accent);
+        font-size: 0.8rem;
+        font-weight: 600;
+        padding: 0.75rem 1.5rem;
+        background: var(--violet);
+        color: var(--ivory);
+        border: none;
+        text-decoration: none;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .nav-cta:hover {
+        background: var(--violet-dark);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(107, 76, 154, 0.3);
+      }
+
+      /* ============================================
+         SPLIT SCREEN LAYOUT
+      ============================================ */
+      .split-container {
+        display: flex;
+        min-height: 100vh;
+      }
+
+      .content-side {
+        width: 50%;
+        min-height: 100vh;
+        padding: 8rem 4rem 4rem;
+        overflow-y: auto;
+      }
+
+      .canvas-side {
+        width: 50%;
+        height: 100vh;
+        position: sticky;
+        top: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: var(--grey-light);
+        padding: 1rem;
+      }
+
+      /* ============================================
+         VINTAGE MUSEUM FRAME
+      ============================================ */
+      .vintage-frame {
+        position: relative;
+        width: auto;
+        height: 55vh;
+
+        margin-right: 7vh;
+        max-height: 720px;
+        max-width: 1280px;
+        aspect-ratio: 16 / 9;
+        padding: 30px;
+        background: linear-gradient(
+          145deg,
+          #d4af37 0%,
+          #c5a028 15%,
+          #f4d03f 30%,
+          #d4af37 45%,
+          #8b7355 60%,
+          #6b5344 75%,
+          #8b7355 90%,
+          #d4af37 100%
+        );
+        border-radius: 8px;
+      }
+
+      .vintage-frame::before {
+        content: "";
+        position: absolute;
+        inset: 8px;
+        background: linear-gradient(
+          145deg,
+          #5c4033 0%,
+          #3d2817 50%,
+          #5c4033 100%
+        );
+        border-radius: 4px;
+        box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.5);
+      }
+
+      .vintage-frame::after {
+        content: "";
+        position: absolute;
+        inset: 15px;
+        border: 2px solid rgba(212, 175, 55, 0.4);
+        border-radius: 2px;
+        pointer-events: none;
+      }
+
+      .frame-inner {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        background: var(--grey-light);
+        border-radius: 2px;
+        overflow: hidden;
+        box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.1);
+      }
+
+      .frame-inner::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        pointer-events: none;
+        z-index: 10;
+      }
+
+      /* Corner ornaments */
+      .corner-ornament {
+        position: absolute;
+        width: 30px;
+        height: 30px;
+        border: 3px solid rgba(212, 175, 55, 0.6);
+        z-index: 5;
+      }
+
+      .corner-ornament.top-left {
+        top: 3px;
+        left: 3px;
+        border-right: none;
+        border-bottom: none;
+      }
+
+      .corner-ornament.top-right {
+        top: 3px;
+        right: 3px;
+        border-left: none;
+        border-bottom: none;
+      }
+
+      .corner-ornament.bottom-left {
+        bottom: 3px;
+        left: 3px;
+        border-right: none;
+        border-top: none;
+      }
+
+      .corner-ornament.bottom-right {
+        bottom: 3px;
+        right: 3px;
+        border-left: none;
+        border-top: none;
+      }
+
+      #car-canvas {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      /* ============================================
+         HERO SECTION
+      ============================================ */
+      .hero-content {
+        min-height: calc(100vh - 8rem);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .hero-tagline {
+        font-family: var(--font-accent);
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: var(--turquoise);
+        text-transform: uppercase;
+        letter-spacing: 0.3em;
+        margin-bottom: 1.5rem;
+      }
+
+      .hero-title {
+        font-family: var(--font-display);
+        font-size: clamp(2.5rem, 5vw, 4rem);
+        font-weight: 700;
+        color: var(--charcoal);
+        line-height: 1.1;
+        margin-bottom: 1.5rem;
+      }
+
+      .hero-title .highlight {
+        color: var(--violet);
+        font-style: italic;
+      }
+
+      .hero-description {
+        font-family: var(--font-body);
+        font-size: 1.3rem;
+        font-weight: 400;
+        color: var(--grey-dark);
+        line-height: 1.8;
+        margin-bottom: 2.5rem;
+        max-width: 500px;
+      }
+
+      .hero-stats {
+        display: flex;
+        gap: 3rem;
+        margin-bottom: 3rem;
+        padding: 2rem 0;
+        border-top: 1px solid var(--grey-medium);
+        border-bottom: 1px solid var(--grey-medium);
+      }
+
+      .stat-item {
+        text-align: left;
+      }
+
+      .stat-number {
+        font-family: var(--font-display);
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: var(--violet);
+        line-height: 1;
+      }
+
+      .stat-label {
+        font-family: var(--font-accent);
+        font-size: 0.7rem;
+        font-weight: 500;
+        color: var(--grey-dark);
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        margin-top: 0.5rem;
+      }
+
+      .hero-cta {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+      }
+
+      .btn-primary {
+        font-family: var(--font-accent);
+        font-size: 0.85rem;
+        font-weight: 600;
+        padding: 1rem 2rem;
+        background: var(--violet);
+        color: var(--ivory);
+        border: 2px solid var(--violet);
+        text-decoration: none;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .btn-primary:hover {
+        background: var(--violet-dark);
+        border-color: var(--violet-dark);
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(107, 76, 154, 0.35);
+      }
+
+      .btn-secondary {
+        font-family: var(--font-accent);
+        font-size: 0.85rem;
+        font-weight: 600;
+        padding: 1rem 2rem;
+        background: transparent;
+        color: var(--charcoal);
+        border: 2px solid var(--charcoal);
+        text-decoration: none;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .btn-secondary:hover {
+        background: var(--charcoal);
+        color: var(--ivory);
+        transform: translateY(-3px);
+      }
+
+      /* ============================================
+         SECTION STYLES
+      ============================================ */
+      .section {
+        padding: 6rem 0;
+        border-top: 1px solid var(--grey-medium);
+      }
+
+      .section-label {
+        font-family: var(--font-accent);
+        font-size: 0.7rem;
+        font-weight: 600;
+        color: var(--turquoise);
+        text-transform: uppercase;
+        letter-spacing: 0.3em;
+        margin-bottom: 1rem;
+      }
+
+      .section-title {
+        font-family: var(--font-display);
+        font-size: clamp(2rem, 4vw, 2.8rem);
+        font-weight: 600;
+        color: var(--charcoal);
+        margin-bottom: 2rem;
+        line-height: 1.2;
+      }
+
+      .section-text {
+        font-family: var(--font-body);
+        font-size: 1.15rem;
+        color: var(--grey-dark);
+        line-height: 1.9;
+        margin-bottom: 1.5rem;
+      }
+
+      /* ============================================
+         ABOUT SECTION
+      ============================================ */
+      .about-philosophy {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+        margin-top: 3rem;
+      }
+
+      .philosophy-card {
+        padding: 2rem;
+        background: rgba(255, 255, 240, 0.5);
+        border-left: 3px solid var(--violet);
+        transition: all 0.3s ease;
+      }
+
+      .philosophy-card:hover {
+        transform: translateX(5px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      }
+
+      .philosophy-card h4 {
+        font-family: var(--font-display);
+        font-size: 1.3rem;
+        color: var(--charcoal);
+        margin-bottom: 0.75rem;
+      }
+
+      .philosophy-card p {
+        font-family: var(--font-body);
+        font-size: 1rem;
+        color: var(--grey-dark);
+        line-height: 1.7;
+      }
+
+      /* ============================================
+         GALLERY SECTION
+      ============================================ */
+      .gallery-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+        margin-top: 2rem;
+      }
+
+      .gallery-item {
+        position: relative;
+        aspect-ratio: 4/3;
+        overflow: hidden;
+        cursor: pointer;
+      }
+
+      .gallery-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+      }
+
+      .gallery-item:hover img {
+        transform: scale(1.08);
+      }
+
+      .gallery-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          180deg,
+          transparent 0%,
+          rgba(45, 45, 45, 0.9) 100%
+        );
+        opacity: 0;
+        transition: opacity 0.4s ease;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        padding: 1.5rem;
+      }
+
+      .gallery-item:hover .gallery-overlay {
+        opacity: 1;
+      }
+
+      .gallery-overlay h4 {
+        font-family: var(--font-display);
+        font-size: 1.2rem;
+        color: var(--ivory);
+        margin-bottom: 0.25rem;
+      }
+
+      .gallery-overlay p {
+        font-family: var(--font-accent);
+        font-size: 0.75rem;
+        color: var(--yellow);
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+      }
+
+      .gallery-featured {
+        grid-column: span 2;
+        aspect-ratio: 16/9;
+      }
+
+      /* ============================================
+         CONTACT SECTION
+      ============================================ */
+      .contact-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 3rem;
+        margin-top: 2rem;
+      }
+
+      .contact-info h4 {
+        font-family: var(--font-display);
+        font-size: 1.4rem;
+        color: var(--charcoal);
+        margin-bottom: 1rem;
+      }
+
+      .contact-detail {
+        display: flex;
+        align-items: flex-start;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .contact-icon {
+        width: 40px;
+        height: 40px;
+        background: var(--violet);
+        color: var(--ivory);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1rem;
+        flex-shrink: 0;
+      }
+
+      .contact-detail p {
+        font-family: var(--font-body);
+        font-size: 1.1rem;
+        color: var(--grey-dark);
+        line-height: 1.6;
+      }
+
+      .contact-detail strong {
+        font-family: var(--font-accent);
+        font-size: 0.8rem;
+        color: var(--charcoal);
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        display: block;
+        margin-bottom: 0.25rem;
+      }
+
+      .contact-form {
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem;
+      }
+
+      .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      .form-group label {
+        font-family: var(--font-accent);
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: var(--charcoal);
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+      }
+
+      .form-group input,
+      .form-group textarea,
+      .form-group select {
+        font-family: var(--font-body);
+        font-size: 1rem;
+        padding: 0.875rem 1rem;
+        border: 1px solid var(--grey-medium);
+        background: rgba(255, 255, 240, 0.3);
+        color: var(--charcoal);
+        transition: all 0.3s ease;
+      }
+
+      .form-group input:focus,
+      .form-group textarea:focus,
+      .form-group select:focus {
+        outline: none;
+        border-color: var(--violet);
+        box-shadow: 0 0 0 3px rgba(107, 76, 154, 0.1);
+      }
+
+      .form-group textarea {
+        resize: vertical;
+        min-height: 120px;
+      }
+
+      /* ============================================
+         REGISTER SECTION
+      ============================================ */
+      .register-intro {
+        background: linear-gradient(
+          135deg,
+          rgba(107, 76, 154, 0.08) 0%,
+          rgba(64, 181, 173, 0.08) 100%
+        );
+        padding: 2rem;
+        margin-bottom: 2rem;
+        border-left: 4px solid var(--violet);
+      }
+
+      .register-steps {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        margin: 2rem 0;
+      }
+
+      .step-item {
+        display: flex;
+        gap: 1.5rem;
+        align-items: flex-start;
+      }
+
+      .step-number {
+        width: 45px;
+        height: 45px;
+        background: var(--violet);
+        color: var(--ivory);
+        font-family: var(--font-display);
+        font-size: 1.3rem;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+
+      .step-content h4 {
+        font-family: var(--font-display);
+        font-size: 1.2rem;
+        color: var(--charcoal);
+        margin-bottom: 0.5rem;
+      }
+
+      .step-content p {
+        font-family: var(--font-body);
+        font-size: 1rem;
+        color: var(--grey-dark);
+        line-height: 1.6;
+      }
+
+      .register-form {
+        margin-top: 2rem;
+        padding: 2rem;
+        background: rgba(255, 255, 240, 0.5);
+        border: 1px solid var(--grey-medium);
+      }
+
+      .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+      }
+
+      /* ============================================
+         FOOTER
+      ============================================ */
+      .footer {
+        padding: 3rem 0;
+        border-top: 1px solid var(--grey-medium);
+        text-align: center;
+      }
+
+      .footer-logo {
+        font-family: var(--font-display);
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--violet);
+        margin-bottom: 1rem;
+      }
+
+      .footer-logo span {
+        color: var(--turquoise);
+        font-style: italic;
+      }
+
+      .footer-text {
+        font-family: var(--font-body);
+        font-size: 0.95rem;
+        color: var(--grey-dark);
+      }
+
+      .footer-links {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        margin-top: 1.5rem;
+        list-style: none;
+      }
+
+      .footer-links a {
+        font-family: var(--font-accent);
+        font-size: 0.75rem;
+        color: var(--grey-dark);
+        text-decoration: none;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        transition: color 0.3s ease;
+      }
+
+      .footer-links a:hover {
+        color: var(--violet);
+      }
+
+      /* ============================================
+         ANIMATIONS
+      ============================================ */
+      .fade-up {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+
+      .fade-in {
+        opacity: 0;
+      }
+
+      .slide-right {
+        opacity: 0;
+        transform: translateX(-40px);
+      }
+
+      /* ============================================
+         RESPONSIVE
+      ============================================ */
+      @media (max-width: 1200px) {
+        .content-side {
+          padding: 8rem 3rem 3rem;
+        }
+      }
+
+      @media (max-width: 1024px) {
+        .split-container {
+          flex-direction: column;
+        }
+
+        .content-side {
+          width: 100%;
+          padding: 6rem 2rem 3rem;
+          order: 2;
+        }
+
+        .canvas-side {
+          width: 100%;
+          height: 70vh;
+          position: relative;
+          order: 1;
+          padding-top: 5rem;
+        }
+
+        .vintage-frame {
+          padding: 15px;
+        }
+
+        .hero-stats {
+          gap: 2rem;
+        }
+
+        .about-philosophy,
+        .gallery-grid,
+        .contact-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .gallery-featured {
+          grid-column: span 1;
+        }
+
+        .form-row {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .navbar {
+          padding: 1rem 1.5rem;
+        }
+
+        .nav-links {
+          display: none;
+        }
+
+        .hero-title {
+          font-size: 2rem;
+        }
+
+        .hero-stats {
+          flex-direction: column;
+          gap: 1.5rem;
+        }
+
+        .hero-cta {
+          flex-direction: column;
+        }
+
+        .btn-primary,
+        .btn-secondary {
+          text-align: center;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+      <a href="#" class="logo">Zartan<span>.</span></a>
+      <ul class="nav-links">
+        <li><a href="#hero">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <a href="#register" class="nav-cta">Start Your Build</a>
+    </nav>
+
+    <!-- Main Split Layout -->
+    <div class="split-container">
+      <!-- Left: Scrollable Content -->
+      <div class="content-side">
+        <!-- Hero Section -->
+        <section id="hero" class="hero-content">
+          <p class="hero-tagline fade-up">Premium Vintage Restoration</p>
+          <h1 class="hero-title fade-up">
+            Where Timeless Design Meets
+            <span class="highlight">Modern Performance</span>
+          </h1>
+          <p class="hero-description fade-up">
+            At Zartan, we don't just restore cars — we reimagine legends.
+            Combining handcrafted artistry with cutting-edge engineering to
+            create restomods that honor heritage while embracing the future.
+          </p>
+
+          <div class="hero-stats fade-up">
+            <div class="stat-item">
+              <div class="stat-number">150+</div>
+              <div class="stat-label">Builds Completed</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number">12</div>
+              <div class="stat-label">Master Craftsmen</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number">25</div>
+              <div class="stat-label">Years Legacy</div>
+            </div>
+          </div>
+
+          <div class="hero-cta fade-up">
+            <a href="#register" class="btn-primary">Begin Your Journey</a>
+            <a href="#gallery" class="btn-secondary">View Our Work</a>
+          </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="section">
+          <p class="section-label fade-up">Our Story</p>
+          <h2 class="section-title fade-up">Craftsmanship Born From Passion</h2>
+          <p class="section-text fade-up">
+            Founded on the belief that automotive legends deserve a second
+            chapter, Zartan Restomods has spent over two decades perfecting the
+            art of the restomod. We see beyond rust and patina to the soul of
+            each vehicle — then bring it roaring back to life with modern
+            reliability, performance, and safety.
+          </p>
+          <p class="section-text fade-up">
+            Every project begins with a conversation, not a contract. We listen
+            to your vision, understand your connection to the marque, and craft
+            a restoration plan that honors both the car's heritage and your
+            individual story.
+          </p>
+
+          <div class="about-philosophy">
+            <div class="philosophy-card fade-up">
+              <h4>Heritage First</h4>
+              <p>
+                We preserve the character that makes each classic iconic,
+                ensuring authenticity in every curve and contour.
+              </p>
+            </div>
+            <div class="philosophy-card fade-up">
+              <h4>Modern Soul</h4>
+              <p>
+                Beneath period-correct exteriors lie fuel-injected engines,
+                modern suspensions, and contemporary safety systems.
+              </p>
+            </div>
+            <div class="philosophy-card fade-up">
+              <h4>Bespoke Always</h4>
+              <p>
+                No two Zartan builds are alike. Each is tailored to the owner's
+                vision, driving style, and intended use.
+              </p>
+            </div>
+            <div class="philosophy-card fade-up">
+              <h4>Built to Drive</h4>
+              <p>
+                These aren't trailer queens. Our restomods are engineered for
+                miles of smiles, not museum display.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Gallery Section -->
+        <section id="gallery" class="section">
+          <p class="section-label fade-up">Portfolio</p>
+          <h2 class="section-title fade-up">Recent Masterpieces</h2>
+          <p class="section-text fade-up">
+            Each build tells a story. Explore our collection of completed
+            restorations and discover the possibilities for your own automotive
+            revival.
+          </p>
+
+          <div class="gallery-grid">
+            <div class="gallery-item gallery-featured fade-up">
+              <img src="static/bg.png" alt="Featured Restomod" />
+              <div class="gallery-overlay">
+                <h4>1967 Mustang GT500</h4>
+                <p>Full Rotisserie Restoration</p>
+              </div>
+            </div>
+            <div class="gallery-item fade-up">
+              <img src="static/t1.png" alt="Restomod 1" />
+              <div class="gallery-overlay">
+                <h4>1973 Porsche 911 RS</h4>
+                <p>Outlaw Build</p>
+              </div>
+            </div>
+            <div class="gallery-item fade-up">
+              <img src="static/t2.png" alt="Restomod 2" />
+              <div class="gallery-overlay">
+                <h4>1969 Camaro Z28</h4>
+                <p>Pro-Touring Conversion</p>
+              </div>
+            </div>
+            <div class="gallery-item fade-up">
+              <img src="static/m1.png" alt="Restomod 3" />
+              <div class="gallery-overlay">
+                <h4>1962 Ferrari 250 GTE</h4>
+                <p>Concours Restoration</p>
+              </div>
+            </div>
+            <div class="gallery-item fade-up">
+              <img src="static/m2.png" alt="Restomod 4" />
+              <div class="gallery-overlay">
+                <h4>1970 Dodge Challenger</h4>
+                <p>Modern Hemi Swap</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="section">
+          <p class="section-label fade-up">Get In Touch</p>
+          <h2 class="section-title fade-up">Let's Talk About Your Vision</h2>
+
+          <div class="contact-grid">
+            <div class="contact-info fade-up">
+              <h4>Visit Our Workshop</h4>
+              <div class="contact-detail">
+                <div class="contact-icon">&#9993;</div>
+                <div>
+                  <strong>Email</strong>
+                  <p>builds@zartan-restomods.com</p>
+                </div>
+              </div>
+              <div class="contact-detail">
+                <div class="contact-icon">&#9742;</div>
+                <div>
+                  <strong>Phone</strong>
+                  <p>+1 (555) ZARTAN-01</p>
+                </div>
+              </div>
+              <div class="contact-detail">
+                <div class="contact-icon">&#9906;</div>
+                <div>
+                  <strong>Location</strong>
+                  <p>
+                    1247 Heritage Lane<br />
+                    Monterey, California 93940
+                  </p>
+                </div>
+              </div>
+              <div class="contact-detail">
+                <div class="contact-icon">&#9200;</div>
+                <div>
+                  <strong>Hours</strong>
+                  <p>
+                    Mon - Fri: 8AM - 6PM<br />
+                    Saturday: By Appointment
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <form class="contact-form fade-up">
+              <div class="form-group">
+                <label for="contact-name">Your Name</label>
+                <input type="text" id="contact-name" placeholder="John Doe" />
+              </div>
+              <div class="form-group">
+                <label for="contact-email">Email Address</label>
+                <input
+                  type="email"
+                  id="contact-email"
+                  placeholder="john@example.com"
+                />
+              </div>
+              <div class="form-group">
+                <label for="contact-subject">Subject</label>
+                <select id="contact-subject">
+                  <option value="">Select a topic...</option>
+                  <option value="inquiry">General Inquiry</option>
+                  <option value="quote">Request a Quote</option>
+                  <option value="visit">Schedule a Visit</option>
+                  <option value="parts">Parts & Sourcing</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="contact-message">Message</label>
+                <textarea
+                  id="contact-message"
+                  placeholder="Tell us about your project or question..."
+                ></textarea>
+              </div>
+              <button type="submit" class="btn-primary">Send Message</button>
+            </form>
+          </div>
+        </section>
+
+        <!-- Register/Order Section -->
+        <section id="register" class="section">
+          <p class="section-label fade-up">Begin Your Build</p>
+          <h2 class="section-title fade-up">Commission Your Restomod</h2>
+
+          <div class="register-intro fade-up">
+            <p class="section-text" style="margin-bottom: 0">
+              Every great restoration begins with a vision. Fill out the form
+              below to start the conversation. Our team will reach out within 48
+              hours to discuss your project in detail.
+            </p>
+          </div>
+
+          <div class="register-steps">
+            <div class="step-item fade-up">
+              <div class="step-number">1</div>
+              <div class="step-content">
+                <h4>Initial Consultation</h4>
+                <p>
+                  Share your vision, budget range, and timeline. We'll assess
+                  feasibility and provide initial guidance.
+                </p>
+              </div>
+            </div>
+            <div class="step-item fade-up">
+              <div class="step-number">2</div>
+              <div class="step-content">
+                <h4>Vehicle Assessment</h4>
+                <p>
+                  Bring in your classic or let us source one. We'll conduct a
+                  thorough inspection and create a detailed build plan.
+                </p>
+              </div>
+            </div>
+            <div class="step-item fade-up">
+              <div class="step-number">3</div>
+              <div class="step-content">
+                <h4>Design & Engineering</h4>
+                <p>
+                  Collaborate with our designers on aesthetics and our engineers
+                  on performance specifications.
+                </p>
+              </div>
+            </div>
+            <div class="step-item fade-up">
+              <div class="step-number">4</div>
+              <div class="step-content">
+                <h4>Craftsmanship Begins</h4>
+                <p>
+                  Watch your vision come to life with regular updates, photos,
+                  and workshop visits welcome throughout.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <form class="register-form fade-up">
+            <h4
+              style="
+                font-family: var(--font-display);
+                font-size: 1.3rem;
+                margin-bottom: 1.5rem;
+                color: var(--charcoal);
+              "
+            >
+              Project Inquiry Form
+            </h4>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="reg-firstname">First Name</label>
+                <input type="text" id="reg-firstname" placeholder="John" />
+              </div>
+              <div class="form-group">
+                <label for="reg-lastname">Last Name</label>
+                <input type="text" id="reg-lastname" placeholder="Doe" />
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="reg-email">Email</label>
+                <input
+                  type="email"
+                  id="reg-email"
+                  placeholder="john@example.com"
+                />
+              </div>
+              <div class="form-group">
+                <label for="reg-phone">Phone</label>
+                <input
+                  type="tel"
+                  id="reg-phone"
+                  placeholder="+1 (555) 000-0000"
+                />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="reg-vehicle">Vehicle of Interest</label>
+              <input
+                type="text"
+                id="reg-vehicle"
+                placeholder="e.g., 1967 Ford Mustang Fastback"
+              />
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="reg-ownership">Do You Own the Vehicle?</label>
+                <select id="reg-ownership">
+                  <option value="">Select...</option>
+                  <option value="yes">Yes, I own it</option>
+                  <option value="sourcing">Need help sourcing</option>
+                  <option value="considering">Still considering options</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="reg-budget">Budget Range</label>
+                <select id="reg-budget">
+                  <option value="">Select...</option>
+                  <option value="under100">Under $100,000</option>
+                  <option value="100-250">$100,000 - $250,000</option>
+                  <option value="250-500">$250,000 - $500,000</option>
+                  <option value="over500">$500,000+</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="reg-vision">Describe Your Vision</label>
+              <textarea
+                id="reg-vision"
+                placeholder="Tell us about your dream build — performance goals, aesthetic preferences, intended use, inspiration sources..."
+                style="min-height: 150px"
+              ></textarea>
+            </div>
+
+            <button type="submit" class="btn-primary" style="width: 100%">
+              Submit Project Inquiry
+            </button>
+          </form>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+          <div class="footer-logo">Zartan<span>.</span></div>
+          <p class="footer-text">Reimagining Automotive Legends</p>
+          <ul class="footer-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li><a href="#">Privacy</a></li>
+          </ul>
+        </footer>
+      </div>
+
+      <!-- Right: Sticky Canvas with Vintage Frame -->
+      <div class="canvas-side">
+        <div class="vintage-frame">
+          <div class="corner-ornament top-left"></div>
+          <div class="corner-ornament top-right"></div>
+          <div class="corner-ornament bottom-left"></div>
+          <div class="corner-ornament bottom-right"></div>
+
+          <div class="frame-inner">
+            <canvas id="car-canvas"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scripts -->
     <script>
-      // Register the ScrollTrigger plugin
+      // Register GSAP plugins
       gsap.registerPlugin(ScrollTrigger);
 
+      // ============================================
+      // NAVBAR SCROLL EFFECT
+      // ============================================
+      const navbar = document.getElementById("navbar");
+
+      window.addEventListener("scroll", () => {
+        if (window.scrollY > 50) {
+          navbar.classList.add("scrolled");
+        } else {
+          navbar.classList.remove("scrolled");
+        }
+      });
+
+      // ============================================
+      // CANVAS FRAME ANIMATION
+      // ============================================
       const canvas = document.getElementById("car-canvas");
       const context = canvas.getContext("2d");
 
-      // Original frame dimensions (aspect ratio 16:9)
       const FRAME_WIDTH = 1920;
       const FRAME_HEIGHT = 1080;
       const ASPECT_RATIO = FRAME_WIDTH / FRAME_HEIGHT;
 
-      // Responsive canvas sizing function
       function resizeCanvas() {
         const container = canvas.parentElement;
         const containerWidth = container.clientWidth;
         const containerHeight = container.clientHeight;
-        const containerRatio = containerWidth / containerHeight;
 
-        let newWidth, newHeight;
-
-        // Maintain aspect ratio while fitting container
-        if (containerRatio > ASPECT_RATIO) {
-          // Container is wider than video - fit to height
-          newHeight = containerHeight;
-          newWidth = containerHeight * ASPECT_RATIO;
-        } else {
-          // Container is taller than video - fit to width
-          newWidth = containerWidth;
-          newHeight = containerWidth / ASPECT_RATIO;
-        }
-
-        // Use device pixel ratio for sharp rendering on high-DPI screens
+        // Since frame has aspect-ratio 16:9, just fill the container
         const dpr = window.devicePixelRatio || 1;
-        canvas.width = newWidth * dpr;
-        canvas.height = newHeight * dpr;
-
-        // Scale context to match DPR
+        canvas.width = containerWidth * dpr;
+        canvas.height = containerHeight * dpr;
         context.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-        // Set CSS size
-        canvas.style.width = newWidth + "px";
-        canvas.style.height = newHeight + "px";
+        canvas.style.width = containerWidth + "px";
+        canvas.style.height = containerHeight + "px";
       }
 
-      // Initial resize
       resizeCanvas();
 
-      // --- UPDATED CONFIGURATION ---
-      const frameCount = 98; // Your exact number of frames
-
-      // This tells GSAP exactly how your files are named: ezgif-frame-XXX.jpg
+      const frameCount = 98;
       const currentFrame = (index) => {
-        // EZGIF usually starts at frame 1, so we do index + 1
         let frameNumber = (index + 1).toString().padStart(3, "0");
         return `static/frames/eznew/frame_${frameNumber}.webp`;
       };
-      // -----------------------------
 
       const images = [];
       const car = { frame: 0 };
 
-      // Preload all 98 images into the browser's memory
       for (let i = 0; i < frameCount; i++) {
         const img = new Image();
         img.src = currentFrame(i);
         images.push(img);
       }
 
-      // Draw the very first frame as soon as it loads so the screen isn't blank
       images[0].onload = render;
 
-      // The GSAP Scroll Magic
+      // Scroll-based frame animation tied to content scroll
       gsap.to(car, {
         frame: frameCount - 1,
         snap: "frame",
         ease: "none",
         scrollTrigger: {
-          trigger: ".canvas-scroll-container",
+          trigger: ".content-side",
           start: "top top",
           end: "bottom bottom",
           scrub: 0.5,
@@ -237,24 +1352,121 @@
         onUpdate: render,
       });
 
-      // Renders the current image to the canvas
       function render() {
         const dpr = window.devicePixelRatio || 1;
         const drawWidth = canvas.width / dpr;
         const drawHeight = canvas.height / dpr;
         context.clearRect(0, 0, drawWidth, drawHeight);
-        context.drawImage(images[car.frame], 0, 0, drawWidth, drawHeight);
+        if (images[car.frame]) {
+          context.drawImage(images[car.frame], 0, 0, drawWidth, drawHeight);
+        }
       }
 
-      // Handle window resize
       let resizeTimeout;
       window.addEventListener("resize", () => {
         clearTimeout(resizeTimeout);
         resizeTimeout = setTimeout(() => {
           resizeCanvas();
           render();
-          ScrollTrigger.refresh(); // Recalculate scroll positions after resize
+          ScrollTrigger.refresh();
         }, 100);
+      });
+
+      // ============================================
+      // SCROLL ANIMATIONS
+      // ============================================
+      // Fade up animations
+      gsap.utils.toArray(".fade-up").forEach((el) => {
+        gsap.fromTo(
+          el,
+          { opacity: 0, y: 40 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: el,
+              start: "top 85%",
+              toggleActions: "play none none none",
+            },
+          },
+        );
+      });
+
+      // Stagger gallery items
+      gsap.utils.toArray(".gallery-item").forEach((item, i) => {
+        gsap.fromTo(
+          item,
+          { opacity: 0, y: 50 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.6,
+            delay: i * 0.1,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: item,
+              start: "top 90%",
+              toggleActions: "play none none none",
+            },
+          },
+        );
+      });
+
+      // Philosophy cards stagger
+      gsap.utils.toArray(".philosophy-card").forEach((card, i) => {
+        gsap.fromTo(
+          card,
+          { opacity: 0, x: -30, y: 20 },
+          {
+            opacity: 1,
+            x: 0,
+            y: 0,
+            duration: 0.6,
+            delay: i * 0.15,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: card,
+              start: "top 90%",
+              toggleActions: "play none none none",
+            },
+          },
+        );
+      });
+
+      // Step items stagger
+      gsap.utils.toArray(".step-item").forEach((step, i) => {
+        gsap.fromTo(
+          step,
+          { opacity: 0, x: -40 },
+          {
+            opacity: 1,
+            x: 0,
+            duration: 0.7,
+            delay: i * 0.2,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: step,
+              start: "top 90%",
+              toggleActions: "play none none none",
+            },
+          },
+        );
+      });
+
+      // Smooth scroll for navigation links
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute("href"));
+          if (target) {
+            target.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+            });
+          }
+        });
       });
     </script>
   </body>
