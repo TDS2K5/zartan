@@ -61,5 +61,5 @@ python -m http.server 8000
 npx serve
 ``` -->
 
-3. Navigate to `http://localhost:8000`
+<!-- 3. Navigate to `http://localhost:8000` -->
 ````
