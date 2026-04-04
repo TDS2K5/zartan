@@ -777,26 +777,13 @@
       }
 
       @media (max-width: 1024px) {
-        .split-container {
-          flex-direction: column;
-        }
-
         .content-side {
           width: 100%;
           padding: 6rem 2rem 3rem;
-          order: 2;
         }
 
         .canvas-side {
-          width: 100%;
-          height: 70vh;
-          position: relative;
-          order: 1;
-          padding-top: 5rem;
-        }
-
-        .vintage-frame {
-          padding: 15px;
+          display: none;
         }
 
         .hero-stats {
@@ -804,17 +791,16 @@
         }
 
         .about-philosophy,
-        .gallery-grid,
         .contact-grid {
           grid-template-columns: 1fr;
         }
 
-        .gallery-featured {
-          grid-column: span 1;
-        }
-
         .form-row {
           grid-template-columns: 1fr;
+        }
+
+        .vintage-frame {
+          padding: 15px;
         }
       }
 
@@ -827,8 +813,22 @@
           display: none;
         }
 
+        .nav-cta {
+          font-size: 0.7rem;
+          padding: 0.6rem 1rem;
+        }
+
+        .hero-content {
+          min-height: auto;
+          padding-top: 2rem;
+        }
+
         .hero-title {
           font-size: 2rem;
+        }
+
+        .hero-description {
+          font-size: 1.1rem;
         }
 
         .hero-stats {
@@ -843,6 +843,73 @@
         .btn-primary,
         .btn-secondary {
           text-align: center;
+          width: 100%;
+        }
+
+        .section {
+          padding: 4rem 0;
+        }
+
+        .section-title {
+          font-size: 1.8rem;
+        }
+
+        .gallery-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .gallery-featured {
+          grid-column: span 1;
+        }
+
+        .philosophy-card {
+          padding: 1.5rem;
+        }
+
+        .register-form {
+          padding: 1.5rem;
+        }
+
+        .footer-links {
+          flex-wrap: wrap;
+          gap: 1rem;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .content-side {
+          padding: 5rem 1.25rem 2rem;
+        }
+
+        .navbar {
+          padding: 0.75rem 1rem;
+        }
+
+        .logo {
+          font-size: 1.4rem;
+        }
+
+        .hero-title {
+          font-size: 1.7rem;
+        }
+
+        .stat-number {
+          font-size: 2rem;
+        }
+
+        .section-title {
+          font-size: 1.5rem;
+        }
+
+        .contact-icon {
+          width: 35px;
+          height: 35px;
+        }
+
+        .step-number {
+          width: 38px;
+          height: 38px;
+          font-size: 1.1rem;
         }
       }
     
