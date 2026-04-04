@@ -71,6 +71,10 @@
         padding: 0.75rem 3rem;
       }
 
+      .navbar.navbar-hidden {
+        transform: translateY(-100%);
+      }
+
       .logo {
         font-family: var(--font-display);
         font-size: 1.8rem;
@@ -806,16 +810,24 @@
 
       @media (max-width: 768px) {
         .navbar {
-          padding: 1rem 1.5rem;
+          padding: 0.6rem 1rem;
+        }
+
+        .navbar.scrolled {
+          padding: 0.5rem 1rem;
+        }
+
+        .logo {
+          font-size: 1.5rem;
         }
 
         .nav-links {
           display: none;
         }
 
-        .nav-cta {
-          font-size: 0.7rem;
-          padding: 0.6rem 1rem;
+        .navbar .btn-primary {
+          font-size: 0.65rem;
+          padding: 0.5rem 0.8rem;
         }
 
         .hero-content {
@@ -878,15 +890,24 @@
 
       @media (max-width: 480px) {
         .content-side {
-          padding: 5rem 1.25rem 2rem;
+          padding: 4.5rem 1.25rem 2rem;
         }
 
         .navbar {
-          padding: 0.75rem 1rem;
+          padding: 0.5rem 0.75rem;
+        }
+
+        .navbar.scrolled {
+          padding: 0.4rem 0.75rem;
         }
 
         .logo {
-          font-size: 1.4rem;
+          font-size: 1.2rem;
+        }
+
+        .navbar .btn-primary {
+          font-size: 0.6rem;
+          padding: 0.4rem 0.6rem;
         }
 
         .hero-title {
