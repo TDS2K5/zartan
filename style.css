@@ -871,7 +871,7 @@
         }
       }
 
-      @media (max-width: 480px) {
+      @media (width<1024px) {
         .content-side {
           padding: 4.5rem 1.25rem 2rem;
         }
