@@ -763,7 +763,7 @@
         }
       }
 
-      @media (max-width: 1024px) {
+      @media (width< 1024px) {
         .content-side {
           width: 100%;
           padding: 6rem 2rem 3rem;
