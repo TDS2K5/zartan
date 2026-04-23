@@ -157,41 +157,39 @@
  }
 
  .canvas-side {
-   width: 50%;
-   height: 100vh;
-   position: sticky;
-   top: 0;
-   display: flex;
-   justify-content: center;
-   align-items: center;
-   background: var(--grey-light);
-   padding: 1rem;
- }
+    width: 50%;
+    height: 100vh;
+    position: sticky;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--grey-light);
+    padding: 2rem;
+    overflow: hidden;
+  }
 
  /* ============================================
          VINTAGE MUSEUM FRAME
       ============================================ */
  .vintage-frame {
-   position: relative;
-   width: auto;
-   height: 55vh;
-
-   margin-right: 7vh;
-   max-height: 720px;
-   max-width: 1280px;
-   aspect-ratio: 16 / 9;
-   padding: 30px;
-   background: linear-gradient(145deg,
-       #d4af37 0%,
-       #c5a028 15%,
-       #f4d03f 30%,
-       #d4af37 45%,
-       #8b7355 60%,
-       #6b5344 75%,
-       #8b7355 90%,
-       #d4af37 100%);
-   border-radius: 8px;
- }
+    position: relative;
+    width: 100%;
+    max-width: 640px;
+    max-height: calc(100vh - 6rem);
+    aspect-ratio: 16 / 9;
+    padding: clamp(15px, 2.5vw, 30px);
+    background: linear-gradient(145deg,
+        #d4af37 0%,
+        #c5a028 15%,
+        #f4d03f 30%,
+        #d4af37 45%,
+        #8b7355 60%,
+        #6b5344 75%,
+        #8b7355 90%,
+        #d4af37 100%);
+    border-radius: 8px;
+  }
 
  .vintage-frame::before {
    content: "";
@@ -747,77 +745,134 @@
          RESPONSIVE
       ============================================ */
 
- /* High-DPI laptops and small screens (1280px-1440px) */
- @media (max-width: 1440px) {
-   .content-side {
-     width: 55%;
-     padding: 8rem 3rem 3rem;
-   }
+  /* Large screens (above 1440px) */
+  @media (min-width: 1441px) {
+    .vintage-frame {
+      max-width: 720px;
+    }
+  }
 
-   .canvas-side {
-     width: 45%;
-   }
+  /* High-DPI laptops and small screens (1280px-1440px) */
+  @media (max-width: 1440px) {
+    .content-side {
+      width: 55%;
+      padding: 8rem 3rem 3rem;
+    }
 
-   .vintage-frame {
-     height: 50vh;
-     padding: 25px;
-   }
- }
+    .canvas-side {
+      width: 45%;
+      padding: 1.5rem;
+    }
 
- /* Smaller laptops and large tablets (1024px-1280px) */
- @media (max-width: 1280px) {
-   .content-side {
-     width: 60%;
-     padding: 7rem 2.5rem 3rem;
-   }
+    .vintage-frame {
+      max-width: 100%;
+    }
+  }
 
-   .canvas-side {
-     width: 40%;
-   }
+  /* Smaller laptops and large tablets (1024px-1280px) */
+  @media (max-width: 1280px) {
+    .content-side {
+      width: 58%;
+      padding: 7rem 2.5rem 3rem;
+    }
 
-   .vintage-frame {
-     height: 45vh;
-     padding: 20px;
-     margin-right: 3vh;
-   }
+    .canvas-side {
+      width: 42%;
+      padding: 1.25rem;
+    }
 
-   .hero-title {
-     font-size: 2.5rem;
-   }
+    .vintage-frame {
+      max-width: 100%;
+    }
 
-   .hero-stats {
-     gap: 2.5rem;
-   }
- }
+    .hero-title {
+      font-size: 2.5rem;
+    }
 
- /* iPad Pro and tablets (below 1024px) */
- @media (max-width: 1024px) {
-   .content-side {
-     width: 100%;
-     padding: 6rem 2rem 3rem;
-   }
+    .hero-stats {
+      gap: 2rem;
+    }
 
-   .canvas-side {
-     display: none;
-   }
+    .stat-number {
+      font-size: 2rem;
+    }
+  }
 
-   .hero-stats {
-     gap: 2rem;
-   }
+  /* Short viewport heights (hiDPI laptops like 1280x800, 1440x900) */
+  @media (max-height: 850px) and (min-width: 1025px) {
+    .canvas-side {
+      padding: 1rem;
+    }
 
-   .about-philosophy,
-   .contact-grid {
-     grid-template-columns: 1fr;
-   }
+    .vintage-frame {
+      max-width: 95%;
+    }
 
-   .form-row {
-     grid-template-columns: 1fr;
-   }
+    .content-side {
+      padding-top: 6rem;
+    }
 
-   .vintage-frame {
-     padding: 15px;
-   }
- }
+    .hero-content {
+      min-height: calc(100vh - 6rem);
+    }
+  }
+
+  /* Very short viewports (e.g. 1280x720) */
+  @media (max-height: 750px) and (min-width: 1025px) {
+    .canvas-side {
+      padding: 0.75rem;
+    }
+
+    .vintage-frame {
+      max-width: 90%;
+    }
+
+    .hero-content {
+      min-height: calc(100vh - 5rem);
+    }
+
+    .content-side {
+      padding-top: 5rem;
+    }
+
+    .hero-stats {
+      padding: 1.25rem 0;
+      gap: 2rem;
+    }
+
+    .stat-number {
+      font-size: 2rem;
+    }
+
+    .section {
+      padding: 4rem 0;
+    }
+  }
+
+  /* iPad Pro and tablets (below 1024px) */
+  @media (max-width: 1024px) {
+    .content-side {
+      width: 100%;
+      padding: 6rem 2rem 3rem;
+    }
+
+    .canvas-side {
+      display: none;
+    }
+
+    .hero-stats {
+      gap: 2rem;
+    }
+
+    .about-philosophy,
+    .contact-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .form-row {
+      grid-template-columns: 1fr;
+    }
+  }
 
  @media (max-width: 768px) {
    .navbar {

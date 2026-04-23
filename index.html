@@ -1,9 +1,9 @@
-<!doctype html>
+<!doctype html>`
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Zartan Restomods | Premium Vintage Car Restoration</title>
+    <title>Zartan</title>
 
     <link rel="stylesheet" href="style.css" />
 
@@ -533,8 +533,29 @@
         const drawWidth = canvas.width / dpr;
         const drawHeight = canvas.height / dpr;
         context.clearRect(0, 0, drawWidth, drawHeight);
-        if (images[car.frame]) {
-          context.drawImage(images[car.frame], 0, 0, drawWidth, drawHeight);
+        const img = images[car.frame];
+        if (img && img.naturalWidth) {
+          // Cover-fit: maintain source aspect ratio, fill container
+          const imgAspect = img.naturalWidth / img.naturalHeight;
+          const canvasAspect = drawWidth / drawHeight;
+          let sx, sy, sw, sh;
+          if (canvasAspect > imgAspect) {
+            // Canvas is wider than image — crop top/bottom
+            sw = img.naturalWidth;
+            sh = img.naturalWidth / canvasAspect;
+            sx = 0;
+            sy = (img.naturalHeight - sh) / 2;
+          } else {
+            // Canvas is taller than image — crop left/right
+            sh = img.naturalHeight;
+            sw = img.naturalHeight * canvasAspect;
+            sx = (img.naturalWidth - sw) / 2;
+            sy = 0;
+          }
+          context.drawImage(img, sx, sy, sw, sh, 0, 0, drawWidth, drawHeight);
+        } else if (img) {
+          // Fallback: image not yet decoded, draw stretched
+          context.drawImage(img, 0, 0, drawWidth, drawHeight);
         }
       }
 
