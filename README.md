@@ -3,6 +3,7 @@
 A premium frontend for a vintage car restoration (restomod) business. Features a museum-inspired design with smooth GSAP scroll animations and a unique split-screen layout.
 
 ![Screenshot](static/home.png)
+![Screenshot](static/oldcar.png)
 
 ## Features
 
