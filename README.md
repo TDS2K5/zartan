@@ -2,6 +2,8 @@
 
 A premium frontend for a vintage car restoration (restomod) business. Features a museum-inspired design with smooth GSAP scroll animations and a unique split-screen layout.
 
+![Screenshot](static/home.png)
+
 ## Features
 
 - **Split-Screen Layout**: Scrollable content on the left, sticky animated canvas on the right
@@ -63,3 +65,4 @@ npx serve
 
 <!-- 3. Navigate to `http://localhost:8000` -->
 
+````
